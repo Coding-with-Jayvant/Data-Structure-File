@@ -1,0 +1,276 @@
+/*
+    Name        :: Jayavant Warkhade.
+    Roll No.    :: 70
+    Tittle      :: File opearations Insert,display,delete,modify.
+    Practical No:: 08
+*/
+#include<iostream>
+#include<fstream>
+using namespace std;
+struct batsman
+{
+	char name[20];
+	int score;
+	int age;
+}e;
+int main()
+{
+	int ch,c,flag,id;
+	ofstream outf,outf1;
+	outf.open("btsm.txt");
+	ifstream inf;
+	do{
+		cout<<"\n Which operation do you want to Perform--> ";
+		cout<<"\n\t1.INSERT RECORD \n\t2.DISPLAY \n\t3.DELETE \n\t4.MODIFY :: ";
+		cin>>ch;
+		switch(ch)
+		{
+			case 1:
+			do{
+				
+                cout<<"\n Enter the batsman Name :: ";
+                cin>>e.name;
+				cout<<" Enter the batsman Average Score :: ";
+            	cin>>e.score;
+            	cout<<" Enter the batsman Age :: ";
+            	cin>>e.age;
+				outf<<"\t"<<e.name;
+				outf<<"\t"<<e.score;
+				outf<<"\t"<<e.age;
+				cout<<"\n Do you want to continue-> 1.Yes 2.No :: ";
+				cin>>c;
+			}while(c==1);
+			cout<<"|||||||||| Record added successfully |||||||||||";
+			outf.close();
+			break;
+		
+			case 2:
+				inf.open("btsm.txt");
+                cout<<"\n\n --->Display ::";
+                //     cout<<"\n-------------------------------------------------------------------------";
+				// 	cout<<"\n\n\t NAME"<<"\t\t\t A_SCORE"<<"\t\t AGE";
+                //  cout<<"\n-------------------------------------------------------------------------";
+				while(!inf.eof())
+				{
+					inf>>e.name;
+					inf>>e.score;
+					inf>>e.age;
+					// cout<<"\n\t "<<e.name<<"\t\t\t "<<e.score<<"\t\t\t "<<e.age;
+					cout<<"\n batsman name is: "<<e.name;
+					cout<<"\n batsman Average score is: "<<e.score;
+					cout<<"\n batsman age is: "<<e.age;
+				}
+                   cout<<"\n\n-------------------------------------------------------------------------";
+				inf.close();
+				break;
+	
+			case 3:
+				outf1.open("batsman.txt");
+				inf.open("btsm.txt");
+                cout<<"\n\n --->Delete ::";
+				cout<<"\n\t Enter the batsman Score which u want to delete :: ";
+				cin>>id;
+				flag=0;
+				while(!inf.eof())
+				{
+					inf>>e.name;
+					inf>>e.score;
+					inf>>e.age;
+					if(id==e.score)
+					{
+						flag=1;
+						cout<<"|| Record is deleted Successfully........||";
+					}
+					else if(id!=e.score)
+					{
+						outf1<<"\t"<<e.name;
+						outf1<<"\t"<<e.score;
+						outf1<<"\t"<<e.age;
+					}
+				}
+				if(flag==0)
+				{
+					cout<<"Record is not present!!";
+				}
+                
+				inf.close();
+				outf1.close();
+				remove("btsm.txt");
+				rename("batsman.txt","btsm.txt");
+				break;
+
+			case 4:
+				outf1.open("batsman.txt");
+				inf.open("btsm.txt");
+                cout<<"\n\n --->Modify ::";
+				cout<<"\n\t Enter the batsman Score which you want to Modify :: ";
+				cin>>id;
+				flag=0;
+				while(!inf.eof())
+				{
+					inf>>e.name;
+					inf>>e.score;
+					inf>>e.age;
+					if(id==e.score)
+					{
+						cout<<"\t Enter the batsman Name, Score, Age :: ";
+						cin>>e.name>>e.score>>e.age;
+						outf1<<"\t"<<e.name;
+						outf1<<"\t"<<e.score;
+						outf1<<"\t"<<e.age;
+				
+						flag=1;
+
+					}
+					else if(id!=e.score)
+					{
+						outf1<<"\t"<<e.name;
+						outf1<<"\t"<<e.score;
+						outf1<<"\t"<<e.age;
+					}
+				}
+				inf.close();
+				outf1.close();
+                if(flag==0)
+				{
+					cout<<"\n Record is not present!!";
+				}
+				remove("btsm.txt");
+				rename("batsman.txt","btsm.txt");
+				break;
+			}
+			cout<<"\n\n Do you want to continue press 1 :: ";
+			cin>>c;
+		}while(c==1);
+        cout<<"\n\n --------------------Thank you visiting My program -------------------------";
+        	return 0;
+}
+/*
+                                        * output *
+    
+    Which operation do you want to Perform--> 
+        1.INSERT RECORD 
+        2.DISPLAY 
+        3.DELETE 
+        4.MODIFY :: 1
+
+ Enter the batsman Name :: jay
+ Enter the batsman Average Score :: 95
+ Enter the batsman Age :: 21
+
+ Do you want to continue-> 1.Yes 2.No :: 1
+
+ Enter the batsman Name :: adi
+ Enter the batsman Average Score :: 75
+ Enter the batsman Age :: 22
+
+ Do you want to continue-> 1.Yes 2.No :: 1
+
+ Enter the batsman Name :: kohli
+ Enter the batsman Average Score :: 99
+ Enter the batsman Age :: 34
+
+ Do you want to continue-> 1.Yes 2.No :: 1
+
+ Enter the batsman Name :: dhoni
+ Enter the batsman Average Score :: 100
+ Enter the batsman Age :: 43
+
+ Do you want to continue-> 1.Yes 2.No :: 2
+|||||||||| Record added successfully |||||||||||
+
+ Do you want to continue press 1 :: 1
+
+ Which operation do you want to Perform-->
+        1.INSERT RECORD
+        2.DISPLAY
+        3.DELETE
+        4.MODIFY :: 2
+
+
+ --->Display ::
+-------------------------------------------------------------------------
+
+         NAME                    A_SCORE                 AGE
+-------------------------------------------------------------------------
+         jay                     95                      21
+         adi                     75                      22
+         kohli                   99                      34
+         dhoni                   100                     43
+
+-------------------------------------------------------------------------
+
+ Do you want to continue press 1 :: 1
+
+ Which operation do you want to Perform-->
+        1.INSERT RECORD
+        2.DISPLAY
+        3.DELETE
+        4.MODIFY :: 3
+
+
+ --->Delete ::
+         Enter the batsman Score which u want to delete :: 99
+|| Record is deleted Successfully........||
+
+ Do you want to continue press 1 :: 1
+
+ Which operation do you want to Perform-->
+        1.INSERT RECORD
+        2.DISPLAY
+        3.DELETE
+        4.MODIFY :: 2
+
+
+ --->Display ::
+-------------------------------------------------------------------------
+
+         NAME                    A_SCORE                 AGE
+-------------------------------------------------------------------------
+         jay                     95                      21
+         adi                     75                      22
+         dhoni                   100                     43
+
+-------------------------------------------------------------------------
+
+ Do you want to continue press 1 :: 1
+
+ Which operation do you want to Perform-->
+        1.INSERT RECORD
+        2.DISPLAY
+        3.DELETE
+        4.MODIFY :: 4
+
+
+ --->Modify ::
+         Enter the batsman Score which you want to Modify :: 75
+         Enter the batsman Name, Score, Age :: KOHLI
+66
+21
+
+
+ Do you want to continue press 1 :: 1
+
+ Which operation do you want to Perform-->
+        1.INSERT RECORD
+        2.DISPLAY
+        3.DELETE
+        4.MODIFY :: 2
+
+
+ --->Display ::
+-------------------------------------------------------------------------
+
+         NAME                    A_SCORE                 AGE
+-------------------------------------------------------------------------
+         jay                     95                      21
+         KOHLI                   66                      21
+         dhoni                   100                     43
+
+-------------------------------------------------------------------------
+
+ Do you want to continue press 1 :: 2
+
+
+ --------------------Thank you visiting My program -------------------------
+*/
